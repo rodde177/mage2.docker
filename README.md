@@ -9,16 +9,14 @@
 ##### Get Git Repository
     git clone git@github.com:aliuosio/docker-lamp.git
 
-##### start docker first time (!! on OSX !!)
-    sudo chmod -R 777 app_root/
+##### start docker-sync first time (!! on NONE OSX !!)
     cd .docker
     docker-sync start
-    docker-compose -f docker-compose.mac.yml up -d
 
-##### start docker first time (!! on NONE OSX !!)
+##### start docker first time
     sudo chmod -R 777 app_root/
     cd .docker
-    docker-compose up -d
+    docker-compose -f docker-compose.mac.yml up --build
     
 #### after first run (on the everyday bases)
     cd .docker
@@ -47,3 +45,4 @@
 - use sockets instead of TCP
 - make Database Data persistent
 - add Nginx as proxy server
+- add xdebug host automatically in php Dockerfile or per bash script
