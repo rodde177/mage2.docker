@@ -20,6 +20,7 @@ RUN apk add --no-cache --virtual build-dependencies \
     freetype-dev \
     libjpeg-turbo-dev \
     libpng \
+    aria2 \
     libpng-dev
 
 # install build dependencies for PHP
