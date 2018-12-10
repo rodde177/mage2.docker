@@ -3,8 +3,7 @@ version: "2"
 options:
   verbose: true
 syncs:
-  #IMPORTANT: ensure this name is unique and does not match your other container names
-  docker-mac-sync-app:
+  magento-2_data:
     src: ${WORKDIR}
     sync_strategy: 'native_osx'
     sync_args:
