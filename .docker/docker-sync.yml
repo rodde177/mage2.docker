@@ -3,7 +3,7 @@ version: "2"
 options:
   verbose: true
 syncs:
-  magento-2_data:
+  app_data:
     src: ${WORKDIR}
     sync_strategy: 'native_osx'
     sync_args:

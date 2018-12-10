@@ -2,10 +2,10 @@ version: "3.7"
 
 services:
 
-  webserver:
-    build: webserver
-    container_name: ${NAMESPACE}_webserver
-    image: ${NAMESPACE}:webserver
+  nginx:
+    build: nginx
+    container_name: ${NAMESPACE}_nginx
+    image: ${NAMESPACE}:nginx
     links:
       - php
     working_dir: ${WORKDIR_SERVER}
@@ -13,7 +13,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - magento-2_data:${WORKDIR_SERVER}:delegated
+      - app_data:${WORKDIR_SERVER}:delegated
 
   php:
     build:
@@ -26,16 +26,17 @@ services:
     image: ${NAMESPACE}:php_${PHP_VERSION_SET}
     working_dir: ${WORKDIR_SERVER}
     links:
-      - database
+      - mysql
       - mailhog
+      - redis
     volumes:
-      - magento-2_data:${WORKDIR_SERVER}:delegated
+      - app_data:${WORKDIR_SERVER}:delegated
       - ${COMPOSERDIR}:${COMPOSERDIR_SERVER}
 
-  database:
-    build: ./database
-    container_name: ${NAMESPACE}_database
-    image: ${NAMESPACE}:database
+  mysql:
+    build: ./mysql
+    container_name: ${NAMESPACE}_mysql
+    image: ${NAMESPACE}:mysql
     ports:
       - ${DATABASE_PORT_EXTERNAL}:3306
     environment:
@@ -44,21 +45,17 @@ services:
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
     volumes:
-      - magento-2_db:/var/lib/mysql:cached
+      - app_db:/var/lib/mysql:cached
 
-  redis_cache:
-    image: redis:alpine
-    container_name: ${NAMESPACE}_redis_cache
+  redis:
+    build:
+      context: ./redis
+    image: ${NAMESPACE}:redis
+    container_name: ${NAMESPACE}_redis
+    volumes:
+      - app_redis:/data:cached
     ports:
-      - 6380:6379
-    sysctls:
-      net.core.somaxconn: '511'
-
-  redis_session:
-    image: redis:alpine
-    container_name: ${NAMESPACE}_redis_session
-    ports:
-      - 6381:6379
+      - 6379:6379
     sysctls:
       net.core.somaxconn: '511'
 
@@ -70,7 +67,9 @@ services:
       - 1025:1025
 
 volumes:
-  magento-2_db:
+  app_db:
     driver: local
-  magento-2_data:
+  app_redis:
+    driver: local
+  app_data:
     external: true
