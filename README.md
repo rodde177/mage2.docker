@@ -7,38 +7,18 @@
     echo -e "0.0.0.0 app.doc" | sudo tee -a /etc/hosts
 
 ##### Get Git Repository
-    git clone git@github.com:aliuosio/docker-lamp.git
-
-##### start docker-sync first time (!! on NONE OSX !!)
-    cd .docker
-    docker-sync start
+    git clone https://github.com/aliuosio/mage2.docker.git
 
 ##### start docker first time
-    sudo chmod -R 777 app_root/
     cd .docker
-    docker-compose -f docker-compose.mac.yml up --build
+    docker-compose  up --build
     
 #### after first run (on the everyday bases)
     cd .docker
-    docker-compose start
-    
-##### Login to PHP container
-    docker exec -it app_php_<version> bash
-    
-##### Login to Web Server container
-    docker exec -it app_webserver bash
-    
-##### Use Composer
-    docker exec -it app_php_<version> composer <command>
-    
-##### Connect Sequel to MySQL
-    Host: 0.0.0.0
-    User: root
-    Password: root
+    docker-compose up -d
     
 ##### All outgoing mails are sent to MailHog
     https://app.doc:8025
-
 
 ### Todos ###
 - set permssions for webserver on php container
