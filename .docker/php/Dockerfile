@@ -8,6 +8,10 @@ ARG PHP_BUILD_DIR=${PHP_BUILD_DIR}
 # Update alpine
 RUN apk update && apk upgrade
 
+# set permissions
+RUN addgroup -g 3000 -S app
+RUN adduser -u 3000 -S -D -G app app
+
 # add alpine linux Packages for PHP
 RUN apk add --no-cache --virtual build-dependencies \
     go \
