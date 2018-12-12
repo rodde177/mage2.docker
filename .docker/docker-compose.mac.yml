@@ -26,14 +26,14 @@ services:
     image: ${NAMESPACE}:php_${PHP_VERSION_SET}
     working_dir: ${WORKDIR_SERVER}
     links:
-      - mysql
+      - database
       - mailhog
       - redis
     volumes:
       - app_data:${WORKDIR_SERVER}:delegated
       - ${COMPOSERDIR}:${COMPOSERDIR_SERVER}
 
-  mysql:
+  database:
     build: ./mysql
     container_name: ${NAMESPACE}_mysql
     image: ${NAMESPACE}:mysql
@@ -57,7 +57,7 @@ services:
     ports:
       - 6379:6379
     sysctls:
-      net.core.somaxconn: '511'
+      net.core.somaxconn: 1024
 
   mailhog:
     image: mailhog/mailhog:latest

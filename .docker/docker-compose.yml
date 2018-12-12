@@ -26,17 +26,17 @@ services:
     image: ${NAMESPACE}:php_${PHP_VERSION_SET}
     working_dir: ${WORKDIR_SERVER}
     links:
-      - mysql
+      - database
       - mailhog
       - redis
     volumes:
       - app_data:${WORKDIR_SERVER}:delegated
       - ${COMPOSERDIR}:${COMPOSERDIR_SERVER}
 
-  mysql:
+  database:
     build: ./mysql
-    container_name: ${NAMESPACE}_mysql
-    image: ${NAMESPACE}:mysql
+    container_name: ${NAMESPACE}_database
+    image: ${NAMESPACE}:database
     ports:
       - ${DATABASE_PORT_EXTERNAL}:3306
     environment:
