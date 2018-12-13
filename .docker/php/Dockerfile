@@ -99,3 +99,13 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN wget https://files.magerun.net/n98-magerun2.phar \
     && mv n98-magerun2.phar /usr/local/bin/n98-magerun2.phar \
     && chmod +x /usr/local/bin/n98-magerun2.phar
+
+# Install Ioncube Loader
+#RUN wget http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
+#    && tar xvfz ioncube_loaders_lin_x86-64.tar.gz \
+#    && rm ioncube_loaders_lin_x86-64.tar.gz \
+#    && cp ioncube/ioncube_loader_lin_${PHP_VERSION_SET}.so /usr/local/lib/php/extensions/no-debug-non-zts-${PHP_BUILD_DIR}/ \
+#    && rm -rf ioncube \
+#    && cd /usr/local/etc/php/conf.d \
+#    && touch 00-ioncube.ini \
+#    && echo "zend_extension=ioncube_loader_lin_${PHP_VERSION_SET}.so" > 00-ioncube.ini

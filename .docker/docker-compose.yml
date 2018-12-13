@@ -1,19 +1,18 @@
 version: "3.7"
 
 services:
-
   nginx:
-    build: nginx
+    build: ./nginx
     container_name: ${NAMESPACE}_nginx
     image: ${NAMESPACE}:nginx
-    links:
+    depends_on:
       - php
     working_dir: ${WORKDIR_SERVER}
     ports:
       - 80:80
       - 443:443
     volumes:
-      - app_data:${WORKDIR_SERVER}:delegated
+      - ${WORKDIR}:${WORKDIR_SERVER}:delegated
 
   php:
     build:
@@ -25,16 +24,14 @@ services:
     container_name: ${NAMESPACE}_php_${PHP_VERSION_SET}
     image: ${NAMESPACE}:php_${PHP_VERSION_SET}
     working_dir: ${WORKDIR_SERVER}
-    links:
+    depends_on:
       - database
       - mailhog
-      - redis
     volumes:
-      - app_data:${WORKDIR_SERVER}:delegated
-      - ${COMPOSERDIR}:${COMPOSERDIR_SERVER}
+      - ${WORKDIR}:${WORKDIR_SERVER}:delegated
 
   database:
-    build: ./mysql
+    build: ./database
     container_name: ${NAMESPACE}_database
     image: ${NAMESPACE}:database
     ports:
@@ -44,36 +41,20 @@ services:
       MYSQL_USER: ${DATABASE_USER}
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-    volumes:
-      - app_db:/var/lib/mysql:cached
 
   redis:
-    build:
-      context: ./redis
+    build: ./redis
     image: ${NAMESPACE}:redis
     container_name: ${NAMESPACE}_redis
-    volumes:
-      - app_redis:/data:cached
     ports:
       - 6379:6379
     sysctls:
-      net.core.somaxconn: 1024
+      net.core.somaxconn: '1024'
 
   mailhog:
     image: mailhog/mailhog:latest
     container_name: ${NAMESPACE}_mailhog
+    expose:
+      - 1025
     ports:
       - 8025:8025
-      - 1025:1025
-
-volumes:
-  app_db:
-    driver: local
-  app_redis:
-    driver: local
-  app_data:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: ${WORKDIR}
