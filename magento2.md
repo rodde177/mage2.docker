@@ -8,7 +8,7 @@ chmod u+x bin/magento;
 
 bin/magento setup:install \
     --db-host=database \
-    --db-name=magento2 \
+    --db-name=app \
     --db-user=app \
     --db-password=app \
     --backend-frontname=admin \
