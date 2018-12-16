@@ -8,9 +8,9 @@ chmod u+x bin/magento;
 
 bin/magento setup:install \
     --db-host=database \
-    --db-name=app \
-    --db-user=app \
-    --db-password=app \
+    --db-name=magento2 \
+    --db-user=magento2 \
+    --db-password=magento2 \
     --backend-frontname=admin \
     --base-url=http://app.doc/ \
     --language=de_DE \
@@ -21,9 +21,7 @@ bin/magento setup:install \
     --admin-email=admin@example.com \
     --admin-user=admin \
     --admin-password=admin123 \
-    --cleanup-database \
-    --use-rewrites=1 \
-    --use-sample-data
+    --use-rewrites=1
 
 bin/magento sampledata:deploy;
 
