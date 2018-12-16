@@ -1,12 +1,11 @@
 version: "3.7"
 
 services:
-
   nginx:
-    build: nginx
+    build: ./nginx
     container_name: ${NAMESPACE}_nginx
     image: ${NAMESPACE}:nginx
-    links:
+    depends_on:
       - php
     working_dir: ${WORKDIR_SERVER}
     ports:
@@ -20,23 +19,22 @@ services:
       context: ./php
       args:
         PHP_VERSION_SET: ${PHP_VERSION_SET}
-        PHP_VERSION_SET_IMAGE: php:${PHP_VERSION_SET}-fpm-alpine3.7
+        PHP_VERSION_SET_IMAGE: php:${PHP_VERSION_SET}-fpm-alpine3.8
         PHP_BUILD_DIR: ${PHP_BUILD_DIR}
     container_name: ${NAMESPACE}_php_${PHP_VERSION_SET}
     image: ${NAMESPACE}:php_${PHP_VERSION_SET}
     working_dir: ${WORKDIR_SERVER}
-    links:
+    depends_on:
       - database
       - mailhog
       - redis
     volumes:
       - app_data:${WORKDIR_SERVER}:delegated
-      - ${COMPOSERDIR}:${COMPOSERDIR_SERVER}
 
   database:
-    build: ./mysql
-    container_name: ${NAMESPACE}_mysql
-    image: ${NAMESPACE}:mysql
+    build: ./database
+    container_name: ${NAMESPACE}_database
+    image: ${NAMESPACE}:database
     ports:
       - ${DATABASE_PORT_EXTERNAL}:3306
     environment:
@@ -48,8 +46,7 @@ services:
       - app_db:/var/lib/mysql:cached
 
   redis:
-    build:
-      context: ./redis
+    build: ./redis
     image: ${NAMESPACE}:redis
     container_name: ${NAMESPACE}_redis
     volumes:
@@ -62,6 +59,8 @@ services:
   mailhog:
     image: mailhog/mailhog:latest
     container_name: ${NAMESPACE}_mailhog
+    expose:
+      - 1025
     ports:
       - 8025:8025
       - 1025:1025
