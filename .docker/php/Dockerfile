@@ -59,7 +59,8 @@ ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Install phpredis and xdebug per pecl
-RUN pecl install -o -f redis xdebug \
+RUN pecl channel-update pecl.php.net \
+    && pecl install -o -f redis xdebug \
     &&  rm -rf /tmp/pear \
     &&  docker-php-ext-enable redis xdebug
 
@@ -78,16 +79,6 @@ RUN cp /root/go/bin/mhsendmail /usr/bin/mhsendmail
 # Set Timezone
 ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# Install Ioncube Loader
-RUN wget http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
-    && tar xvfz ioncube_loaders_lin_x86-64.tar.gz \
-    && rm ioncube_loaders_lin_x86-64.tar.gz \
-    && cp ioncube/ioncube_loader_lin_${PHP_VERSION_SET}.so /usr/local/lib/php/extensions/no-debug-non-zts-${PHP_BUILD_DIR}/ \
-    && rm -rf ioncube \
-    && cd /usr/local/etc/php/conf.d \
-    && touch 00-ioncube.ini \
-    && echo "zend_extension=ioncube_loader_lin_${PHP_VERSION_SET}.so" > 00-ioncube.ini
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
