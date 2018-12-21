@@ -21,7 +21,6 @@ services:
       args:
         PHP_VERSION_SET: ${PHP_VERSION_SET}
         PHP_VERSION_SET_IMAGE: php:${PHP_VERSION_SET}-fpm-alpine3.8
-        PHP_BUILD_DIR: ${PHP_BUILD_DIR}
     container_name: ${NAMESPACE}_php_${PHP_VERSION_SET}
     image: ${NAMESPACE}/php_${PHP_VERSION_SET}
     working_dir: ${WORKDIR_SERVER}
