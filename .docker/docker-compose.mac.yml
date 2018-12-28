@@ -2,10 +2,10 @@ version: "3.7"
 
 services:
 
-  apache:
-    build: ./apache
-    container_name: ${NAMESPACE}_apache
-    image: ${NAMESPACE}/apache
+  nginx:
+    build: ./nginx
+    container_name: ${NAMESPACE}_nginx
+    image: ${NAMESPACE}/nginx
     links:
       - php
     working_dir: ${WORKDIR_SERVER}

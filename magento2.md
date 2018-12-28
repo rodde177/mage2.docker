@@ -1,3 +1,5 @@
+composer global require hirak/prestissimo
+
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.2.7 .
 
 find var vendor pub/static pub/media app/etc -type d -exec chmod u+w {} \;
