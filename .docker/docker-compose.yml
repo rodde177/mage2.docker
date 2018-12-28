@@ -56,8 +56,8 @@ services:
   redis:
     image: redis:alpine
     container_name: ${NAMESPACE}_redis
-    expose:
-      - 6379
+    ports:
+      - 6379:6379
     sysctls:
       net.core.somaxconn: 1024
     volumes:
