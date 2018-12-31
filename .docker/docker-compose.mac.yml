@@ -2,10 +2,10 @@ version: "3.7"
 
 services:
 
-  nginx:
-    build: ./nginx
-    container_name: ${NAMESPACE}_nginx
-    image: ${NAMESPACE}/nginx
+  apache:
+    build: ./apache
+    container_name: ${NAMESPACE}_apache
+    image: ${NAMESPACE}/apache
     links:
       - php
     working_dir: ${WORKDIR_SERVER}
@@ -24,7 +24,7 @@ services:
     container_name: ${NAMESPACE}_php_${PHP_VERSION_SET}
     image: ${NAMESPACE}/php_${PHP_VERSION_SET}
     working_dir: ${WORKDIR_SERVER}
-    links:
+    depends_on:
       - database
       - mailhog
       - redis

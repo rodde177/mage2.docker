@@ -2,11 +2,11 @@ version: "3.7"
 
 services:
 
-  nginx:
-    build: ./nginx
-    container_name: ${NAMESPACE}_nginx
-    image: ${NAMESPACE}/nginx
-    depends_on:
+  apache:
+    build: ./apache
+    container_name: ${NAMESPACE}_apache
+    image: ${NAMESPACE}/apache
+    links:
       - php
     working_dir: ${WORKDIR_SERVER}
     ports:
