@@ -5,6 +5,7 @@ FROM $PHP_VERSION_SET_IMAGE
 ARG PHP_VERSION_SET=${PHP_VERSION_SET}
 ARG PHP_BUILD_DIR=${PHP_BUILD_DIR}
 
+
 # Update alpine
 RUN apk update && apk upgrade
 
