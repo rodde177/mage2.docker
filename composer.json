@@ -1,0 +1,14 @@
+{
+    "name": "aliuosio/mage2.docker",
+    "description": "Magento 2 - Docker with apache, php, mailhog and redis",
+    "type": "Docker Compose",
+    "keywords": ["docker-compose", "Docker", "apache", "php", "mailhog", "redis"],
+    "homepage": "https://github.com/aliuosio/mage2.docker",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Osiozekhai Aliu",
+            "email": "oaliu@hotmail.com"
+        }
+    ]
+}
