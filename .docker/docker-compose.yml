@@ -16,13 +16,10 @@ services:
       - app_data:${WORKDIR_SERVER}:delegated
 
   php:
-    build:
-      context: ./php
-      args:
-        PHP_VERSION_SET: ${PHP_VERSION_SET}
-        PHP_VERSION_SET_IMAGE: php:${PHP_VERSION_SET}-fpm-alpine3.8
-    container_name: ${NAMESPACE}_php_${PHP_VERSION_SET}
-    image: ${NAMESPACE}/php_${PHP_VERSION_SET}
+    # container_name: ${NAMESPACE}_php_${PHP_VERSION_SET}
+    container_name: ${NAMESPACE}_php_7.1
+    #image: ${NAMESPACE}/php_${PHP_VERSION_SET}
+    image: ${NAMESPACE}/php_7.1
     working_dir: ${WORKDIR_SERVER}
     depends_on:
       - database
