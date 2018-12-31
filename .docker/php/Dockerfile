@@ -56,10 +56,8 @@ RUN docker-php-ext-install \
 
 # set server timezone
 ENV TZ=Europe/Berlin
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# Install phpredis and xdebug per pecl
-RUN pecl channel-update pecl.php.net \
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+    && pecl channel-update pecl.php.net \
     && pecl install -o -f redis xdebug \
     &&  rm -rf /tmp/pear \
     &&  docker-php-ext-enable redis xdebug
@@ -83,3 +81,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Get magerun2
+RUN curl -sS 'https://files.magerun.net/n98-magerun2.phar' -o /usr/local/bin/n98-magerun2.phar; \
+    chmod +x /usr/local/bin/n98-magerun2.phar

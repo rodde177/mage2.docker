@@ -6,7 +6,7 @@ services:
     build: ./nginx
     container_name: ${NAMESPACE}_nginx
     image: ${NAMESPACE}/nginx
-    links:
+    depends_on:
       - php
     working_dir: ${WORKDIR_SERVER}
     ports:
@@ -24,7 +24,7 @@ services:
     container_name: ${NAMESPACE}_php_${PHP_VERSION_SET}
     image: ${NAMESPACE}/php_${PHP_VERSION_SET}
     working_dir: ${WORKDIR_SERVER}
-    links:
+    depends_on:
       - database
       - mailhog
       - redis
