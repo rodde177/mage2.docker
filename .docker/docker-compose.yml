@@ -3,9 +3,10 @@ version: "3.7"
 services:
 
   apache:
-    build: ./apache
+    # build: ./apache
     container_name: ${NAMESPACE}_apache
-    image: ${NAMESPACE}/apache
+    # image: ${NAMESPACE}/apache
+    image: osioaliu/apache
     links:
       - php
     working_dir: ${WORKDIR_SERVER}
@@ -34,9 +35,10 @@ services:
       - app_data:${WORKDIR_SERVER}:delegated
 
   mysql:
-    build: ./database
+    # build: ./mysql
     container_name: ${NAMESPACE}_mysql
-    image: ${NAMESPACE}/mysql
+    # image: ${NAMESPACE}/mysql
+    image: osioaliu/mysql
     ports:
       - ${DATABASE_PORT_EXTERNAL}:3306
     environment:
