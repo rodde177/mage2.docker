@@ -41,4 +41,7 @@ composer require msp/devtools
 composer require mage2tv/magento-cache-clean
 composer require splendidinternet/mage2-locale-de-de
 
+composer config repositories.firegento_magesetup vcs git@github.com:firegento/firegento-magesetup2.git
+composer require firegento/magesetup2:dev-develop
+
 ```
