@@ -3,7 +3,7 @@
     "version": "2.0.8",
     "description": "Magento 2 - Docker with apache, php, mailhog and redis",
     "type": "Docker Compose",
-    "keywords": ["docker-compose", "Docker", ""apache", "php", "mailhog", "redis"],
+    "keywords": ["docker-compose", "Docker", "apache", "php", "mailhog", "redis"],
     "homepage": "https://github.com/aliuosio/mage2.docker",
     "license": "MIT",
     "authors": [
