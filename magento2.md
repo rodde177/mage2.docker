@@ -34,3 +34,8 @@ bin/magento setup:upgrade;
 bin/magento indexer:reindex;
 
 bin/magento cache:clean;
+
+
+composer require msp/devtools
+composer require mage2tv/magento-cache-clean
+composer require splendidinternet/mage2-locale-de-de
