@@ -1,3 +1,4 @@
+```
 composer global require hirak/prestissimo
 
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.2.7 .
@@ -39,3 +40,5 @@ bin/magento cache:clean;
 composer require msp/devtools
 composer require mage2tv/magento-cache-clean
 composer require splendidinternet/mage2-locale-de-de
+
+```
