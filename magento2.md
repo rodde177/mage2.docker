@@ -10,7 +10,7 @@ find var vendor pub/static pub/media app/etc -type f -exec chmod u+w {} \;
 chmod u+x bin/magento;
 
 bin/magento setup:install \
-    --db-host=database \
+    --db-host=mysql \
     --db-name=magento2 \
     --db-user=magento2 \
     --db-password=magento2 \

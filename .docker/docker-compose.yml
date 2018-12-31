@@ -27,16 +27,16 @@ services:
     image: osioaliu/php_7.1
     working_dir: ${WORKDIR_SERVER}
     depends_on:
-      - database
+      - mysql
       - mailhog
       - redis
     volumes:
       - app_data:${WORKDIR_SERVER}:delegated
 
-  database:
+  mysql:
     build: ./database
-    container_name: ${NAMESPACE}_database
-    image: ${NAMESPACE}/database
+    container_name: ${NAMESPACE}_mysql
+    image: ${NAMESPACE}/mysql
     ports:
       - ${DATABASE_PORT_EXTERNAL}:3306
     environment:
