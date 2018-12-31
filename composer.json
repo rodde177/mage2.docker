@@ -1,0 +1,4 @@
+{
+    "name": "aliuosio/mage2.docker",
+    "description": "Magento 2 - Docker with apache, php, mailhog and redis"
+}
