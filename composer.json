@@ -1,6 +1,6 @@
 {
     "name": "aliuosio/mage2.docker",
-    "description": "Magento 2 - Docker with apache, php, mailhog and redis",
+    "description": "Magento 2 - Docker with nginx, php, mailhog and redis",
     "type": "Docker",
     "homepage": "https://aliuosio.github.io/mage2.docker/",
     "license": "MIT",
