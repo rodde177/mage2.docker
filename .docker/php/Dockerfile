@@ -8,8 +8,8 @@ ENV TZ=Europe/Berli
 ENV PATH /usr/local/go/bin:$PATH
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-COPY /conf/php-ini-overrides.ini /usr/local/etc/php/conf.d/php-ini-overrides.ini
-COPY /conf/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY conf/php-ini-overrides.ini /usr/local/etc/php/conf.d/php-ini-overrides.ini
+COPY conf/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 RUN apk update && apk upgrade \
     && addgroup -g 3000 -S app \
