@@ -1,25 +1,48 @@
-# The Docker LAMP Setup
+## The Docker LAMP Setup
 
-## Get Git Repository
-    git clone https://github.com/aliuosio/mage2.docker.git
+### Change settings under ```.docker/.env``` ###
+##### Available 7.0, 7.1, 7.2 all based on php:alpine docker image
 
-## Change settings under ```.docker/.env``` ###
-
-### Available 7.0, 7.1, 7.2 all based on php:alpine docker image
-
-## Add Host Adress to your /etc/hosts
+##### Add Host Adress to your /etc/hosts
     echo -e "0.0.0.0 app.doc" | sudo tee -a /etc/hosts
 
+##### Get Git Repository
+    git clone git@github.com:aliuosio/docker-lamp.git
 
-## start docker first time
+##### start docker first time (!! on OSX !!)
+    sudo chmod -R 777 app_root/
     cd .docker
-    docker-compose build
+    docker-sync start
+    docker-compose -f docker-compose.mac.yml up -d
+
+##### start docker first time (!! on NONE OSX !!)
+    sudo chmod -R 777 app_root/
+    cd .docker
     docker-compose up -d
     
-## All outgoing mails are sent to MailHog
+#### after first run (on the everyday bases)
+    cd .docker
+    docker-compose start
+    
+##### Login to PHP container
+    docker exec -it app_php_<version> bash
+    
+##### Login to Web Server container
+    docker exec -it app_webserver bash
+    
+##### Use Composer
+    docker exec -it app_php_<version> composer <command>
+    
+##### Connect Sequel to MySQL
+    Host: 0.0.0.0
+    User: root
+    Password: root
+    
+##### All outgoing mails are sent to MailHog
     https://app.doc:8025
 
-## Todos ###
-* set permssions for webserver on php container
-* use sockets instead of TCP
-* add xdebug host automatically in php Dockerfile or per bash script
+
+### Todos ###
+- set permssions for webserver on php container
+- use sockets instead of TCP
+- make Database Data persistent
