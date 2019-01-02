@@ -46,4 +46,3 @@
 - set permssions for webserver on php container
 - use sockets instead of TCP
 - make Database Data persistent
-- add Nginx as proxy server
