@@ -3,6 +3,7 @@ version: "3.7"
 services:
 
   nginx:
+    restart: always
     build: ./nginx
     container_name: ${NAMESPACE}_nginx
     image: ${NAMESPACE}/nginx
@@ -16,6 +17,7 @@ services:
       - app_data:${WORKDIR_SERVER}:delegated
 
   php:
+    restart: always
     build:
       context: ./php
       args:
@@ -32,6 +34,7 @@ services:
       - app_data:${WORKDIR_SERVER}:delegated
 
   mysql:
+    restart: always
     build: ./mysql
     container_name: ${NAMESPACE}_mysql
     image: ${NAMESPACE}/mysql
@@ -46,6 +49,7 @@ services:
       - app_db:/var/lib/mysql:cached
 
   redis:
+    restart: always
     build: ./redis
     image: ${NAMESPACE}/redis
     container_name: ${NAMESPACE}_redis
@@ -57,6 +61,7 @@ services:
       - app_redis:/data:cached
 
   mailhog:
+    restart: always
     image: mailhog/mailhog:latest
     container_name: ${NAMESPACE}_mailhog
     expose:
